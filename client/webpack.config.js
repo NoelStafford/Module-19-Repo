@@ -45,10 +45,24 @@ module.exports = () => {
         ],
       }),
     ],
-// TODO: Add CSS loaders and babel to webpack.
+    // TODO: Add CSS loaders and babel to webpack.
     module: {
       rules: [
-        
+        {
+          test: /\.css$/i,
+          use: ['css-loader', 'style-loader']
+        },
+        {
+          test: /\.m?js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env'],
+              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime'],
+            },
+          },
+        },
       ],
     },
   };
